@@ -23,7 +23,7 @@ func (h *handler) OnItem(item interface{}) {
 
 func TestNewDynamicQueue(t *testing.T) {
 	h := &handler{}
-	q := NewDynamicQueue(3, 3, h)
+	q := NewDynamicQueue(3, h)
 	for i := 0; i < 10; i++ {
 		q.Add(strconv.Itoa(i))
 		fmt.Println("add", i)

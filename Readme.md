@@ -1,1 +1,1 @@
-#How emulate dynamically buffered channels in Golang
+# How emulate dynamically buffered channels in Golang

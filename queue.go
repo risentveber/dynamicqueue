@@ -13,10 +13,10 @@ type QueueHandler interface {
 	OnItem(item interface{}) // will be run in parallel
 }
 
-func NewDynamicQueue(workersCount, bufferSize int, handler QueueHandler) DynamicQueue {
+func NewDynamicQueue(workersCount int, handler QueueHandler) DynamicQueue {
 	q := &dynamicQueue{
 		handler:        handler,
-		newItems:       make(chan interface{}, bufferSize),
+		newItems:       make(chan interface{}),
 	}
 	q.itemsToProcess = NewDynamicallyBufferedChannel(q.newItems)
 	q.WaitGroup.Add(workersCount)
@@ -31,7 +31,6 @@ type dynamicQueue struct {
 	newItems       chan interface{}
 	itemsToProcess <- chan interface{}
 	handler        QueueHandler
-	storage        []interface{}
 	sync.WaitGroup
 }
 
